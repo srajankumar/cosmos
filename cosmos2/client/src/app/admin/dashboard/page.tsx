@@ -25,27 +25,17 @@ interface VehicleInfo {
 
 import ThemeToggle from "@/components/ThemeToggle";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 
-import Map from "@/components/admin/Map";
-
-import { Overview } from "@/components/admin/overview";
-import { RecentSales } from "@/components/admin/recent-sales";
 import AuthButton from "@/components/admin/AuthButton";
 import AddDriver from "@/components/admin/AddDriver";
 import DisplayDriver from "@/components/admin/DisplayDriver";
 import DisplayVehicle from "@/components/admin/DisplayVehicle";
 import AddVehicle from "@/components/admin/AddVehicle";
 import DriverInfo from "@/components/employee/EmployeeInfo";
+import AcceptedEmployees from "@/components/employee/AcceptedEmployees";
+import RejectedEmployees from "@/components/employee/RejectedEmployees";
 
 export default function DashboardPage() {
   const [driverInformation, setDriverInformation] = useState<DriverInfo[]>([]);
@@ -143,9 +133,6 @@ export default function DashboardPage() {
   }, []);
   return (
     <>
-      {/* <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
-        <h1>Not Supported</h1>
-      </div> */}
       <div className="flex-col flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
@@ -162,6 +149,12 @@ export default function DashboardPage() {
             <TabsList className="md:flex md:text-xl md:justify-start grid grid-cols-3 md:pb-1 pb-[5.2rem] md:px-1 px-2">
               <TabsTrigger
                 className="md:my-0 my-1 mr-1 md:mr-0"
+                value="overview"
+              >
+                Overview
+              </TabsTrigger>
+              <TabsTrigger
+                className="md:my-0 my-1 mr-1 md:mr-0"
                 value="adddrivers"
               >
                 Add Drivers
@@ -171,18 +164,18 @@ export default function DashboardPage() {
               </TabsTrigger>
               <TabsTrigger
                 className="md:my-0 my-1 mr-1 md:mr-0"
-                value="addvehicles"
+                value="onboard"
               >
-                Add Vehicles
+                Onboard
+              </TabsTrigger>
+              <TabsTrigger className="md:my-0 my-1" value="waiting">
+                Waiting
               </TabsTrigger>
               <TabsTrigger
                 className="md:my-0 my-1 mr-1 md:mr-0"
-                value="vehicles"
+                value="rejected"
               >
-                Vehicles
-              </TabsTrigger>
-              <TabsTrigger className="md:my-0 my-1" value="app">
-                Application
+                DB
               </TabsTrigger>
             </TabsList>
 
@@ -192,14 +185,14 @@ export default function DashboardPage() {
             <TabsContent value="drivers" className="space-y-4">
               <DisplayDriver />
             </TabsContent>
-            <TabsContent value="addvehicles" className="space-y-4">
-              <AddVehicle />
+            <TabsContent value="onboard" className="space-y-4">
+              <AcceptedEmployees drivers={drivers} />
             </TabsContent>
-            <TabsContent value="vehicles" className="space-y-4">
-              <DisplayVehicle />
-            </TabsContent>
-            <TabsContent value="app" className="space-y-4">
+            <TabsContent value="waiting" className="space-y-4">
               <DriverInfo drivers={drivers} />
+            </TabsContent>
+            <TabsContent value="rejected" className="space-y-4">
+              <RejectedEmployees drivers={drivers} />
             </TabsContent>
           </Tabs>
         </div>
