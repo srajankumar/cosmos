@@ -6,6 +6,7 @@ import { userRouter } from "./routes/users.js";
 import { driverRouter } from "./routes/drivers.js";
 import { infoRouter } from "./routes/driverinfo.js";
 import { vehicleRouter } from "./routes/vehicleinfo.js"; // Import the vehicle information routes
+// import { duration } from "./routes/duration.js";
 
 dotenv.config();
 
@@ -21,6 +22,13 @@ app.use("/auth", userRouter); // Authentication-related routes
 app.use("/driver", driverRouter); // Routes for drivers
 app.use("/driver", infoRouter); // Routes for driver information
 app.use("/vehicle", vehicleRouter); // Routes for vehicle information
+// app.use("/duration",duration)
+app.post('/storeDuration', async (req, res) => {
+  const duration = req.body.formattedDuration;
+  // Store the duration in a database or perform other processing
+  console.log('Received session duration:', duration);
+  res.send({ message: 'Duration received successfully' });
+});
 
 // Connect to MongoDB using the provided URI
 mongoose.connect(process.env.MONGO_URI, {
