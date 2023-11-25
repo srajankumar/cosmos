@@ -3,18 +3,10 @@ import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 
-import Schedule from "@/components/driver/Schedule";
-import Vehicle from "@/components/driver/Vehicle";
-import Map from "@/components/driver/Map";
-import RouteMap from "@/components/driver/Route";
-import DriverAuthButton from "@/components/driver/DriverAuthButton";
-import EfficiencyTracking from "@/components/Tracker/page";
-import { SavedInfo } from "@/components/driver/Profile";
-import { Bio } from "@/components/driver/Bio";
+import AuthButton from "@/components/employeee/AuthButton";
 
 export default function DashboardPage() {
   const [popupVisible, setPopupVisible] = useState(false);
@@ -105,57 +97,15 @@ export default function DashboardPage() {
                 <CalendarDateRangePicker />
               </div>
               <ThemeToggle />
-              <DriverAuthButton />
+              <AuthButton />
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="route">Route</TabsTrigger>
-              <TabsTrigger value="parking">Parking</TabsTrigger>
+              <TabsTrigger value="overview">Task</TabsTrigger>
+              <TabsTrigger value="route">Task</TabsTrigger>
+              <TabsTrigger value="parking">Task</TabsTrigger>
             </TabsList>
-            <TabsContent value="overview" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
-                  <CardHeader>
-                    <CardTitle>Profile</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <SavedInfo userName={loginName} />
-                  </CardContent>
-                </Card>
-                <Card className="col-span-4 lg:col-span-3">
-                  <CardHeader>
-                    <CardTitle>Your Schedule</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <Schedule userName={loginName} />
-                  </CardContent>
-                </Card>
-                <Card className="col-span-4 lg:col-span-3">
-                  <CardHeader>
-                    <CardTitle>Vehicle Information</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <Vehicle userName={loginName} />
-                  </CardContent>
-                </Card>
-                <Card className="col-span-4 lg:col-span-4">
-                  <CardHeader>
-                    <CardTitle>Bio</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <Bio userName={loginName} />
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-            <TabsContent value="route" className="space-y-4">
-              <RouteMap userName={loginName} />
-            </TabsContent>
-            <TabsContent value="parking" className="space-y-4">
-              <Map userName={loginName} />
-            </TabsContent>
           </Tabs>
         </div>
       </div>
