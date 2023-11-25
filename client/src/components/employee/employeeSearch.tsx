@@ -1,16 +1,9 @@
 import { GetServerSideProps } from "next";
 import axios from "axios";
-
+import { useState } from "react";
 import mongoose from "mongoose";
 
-import { Button } from "@/components/ui/button";
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Input } from "@/components/ui/input";
 
 import {
   Card,
@@ -20,7 +13,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredDrivers, setFilteredDrivers] = useState<Driver[]>(drivers);
+
   const cardColors = [
     "bg-blue-200",
     "bg-green-200",
@@ -59,11 +56,28 @@ const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
     }
   };
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value.toLowerCase();
+    setSearchTerm(searchTerm);
+
+    const filteredDrivers = drivers.filter((driver) =>
+      driver.name.toLowerCase().includes(searchTerm)
+    );
+    setFilteredDrivers(filteredDrivers);
+  };
+
   return (
-    <div>
-      {/* <h1 className="text-xl pb-5 pt-3 font-semibold">Driver List</h1> */}
-      <div className="pt-1 w-full">
-        {drivers.map(
+    <div className="w-full mt-1">
+      <div className="mb-4">
+        <Input
+          value={searchTerm}
+          onChange={handleSearch}
+          type="text"
+          placeholder="Search"
+        />
+      </div>
+      <div className="pt-1 space-y-4 w-full">
+        {filteredDrivers.map(
           (driver, index) =>
             driver.selected === "-1" && (
               <DriverCard
@@ -107,11 +121,15 @@ const DriverCard: React.FC<DriverCardProps> = ({
   onSelect,
 }) => {
   return (
-    <Card className={`w-full dark:text-black ${color}`}>
+    <Card className={`w-full dark:text-black`}>
       <CardHeader>
-        <CardTitle>{driver.name}</CardTitle>
-        <CardDescription>{driver.interest}</CardDescription>
+        <CardTitle className="text-xl">{driver.name}</CardTitle>
+        <CardDescription className="flex justify-between">
+          <div>{driver.interest}</div>
+          <div>{driver.experience}</div>
+        </CardDescription>
       </CardHeader>
+      <div className={`w-full h-1 dark:text-black ${color}`}></div>
     </Card>
   );
 };

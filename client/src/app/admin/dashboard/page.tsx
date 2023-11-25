@@ -177,7 +177,10 @@ export default function DashboardPage() {
                 DB
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="overview" className="space-y-4 space-x-6 flex">
+            <TabsContent
+              value="overview"
+              className="space-y-4 md:space-x-6 flex md:flex-row flex-col"
+            >
               <div className="lg:w-1/2 w-full">
                 <div className="bg-pink-500/10 dark:bg-pink-200 rounded-2xl flex flex-col items-center mt-7 py-5">
                   <p className="text-3xl font-medium text-gray-500">Welcome,</p>
