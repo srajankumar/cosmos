@@ -13,8 +13,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="container max-w-3xl my-20 bg-green-500">
-          <div>{children}</div>
+        <div className="container flex justify-center items-center">
+          <div className="max-w-3xl md:mx-10 mx-5">{children}</div>
         </div>
         <script src="https://cdn.tailwindcss.com"></script>
       </body>
