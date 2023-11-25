@@ -23,6 +23,12 @@ export default function DriverLogin() {
   const [username, setUsername] = useState("");
   const [, setCookies] = useCookies(["access_token", "username"]);
 
+  const startTimer = () => {
+    // Get the current timestamp and store it in localStorage
+    const startTime = Date.now();
+    window.localStorage.setItem('timerStartTime', startTime.toString());
+  };
+
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     setCookies("username", username);
@@ -35,6 +41,7 @@ export default function DriverLogin() {
 
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);
+      startTimer();
 
       window.location.href = "/driver/dashboard";
     } catch (err) {
