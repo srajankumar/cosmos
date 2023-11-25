@@ -20,6 +20,7 @@ export default function DriverRegister() {
   const [interest, setInterest] = useState("");
   const [country, setCountry] = useState("");
   const [website, setWebsite] = useState("");
+  const [password, setPassword] = useState("");
   const [selected, setSelected] = useState("");
 
   const onSubmit = async (event: SyntheticEvent) => {
@@ -35,6 +36,7 @@ export default function DriverRegister() {
         interest,
         country,
         website,
+        password,
         selected: "-1",
       });
 
@@ -147,6 +149,17 @@ export default function DriverRegister() {
               placeholder="srajan.vercel.app"
               value={website}
               onChange={(event) => setWebsite(event.target.value)}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="website">Password</Label>
+            <Input
+              required
+              id="password"
+              type="password"
+              placeholder="**********"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
           </div>
         </div>
