@@ -60,7 +60,7 @@ const page = () => {
           </div>
           {termsAccepted && <Form />}
         </div>
-        <div className="fixed top-5 right-5">
+        <div className="fixed top-5 left-5">
           <ModeToggle />
         </div>
         <div className="fixed top-5 right-5">

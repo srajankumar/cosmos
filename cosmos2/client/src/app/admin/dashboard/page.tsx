@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -32,6 +32,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 
@@ -44,6 +45,7 @@ import AddDriver from "@/components/admin/AddDriver";
 import DisplayDriver from "@/components/admin/DisplayDriver";
 import DisplayVehicle from "@/components/admin/DisplayVehicle";
 import AddVehicle from "@/components/admin/AddVehicle";
+import DriverInfo from "@/components/employee/EmployeeInfo";
 
 export default function DashboardPage() {
   const [driverInformation, setDriverInformation] = useState<DriverInfo[]>([]);
@@ -82,6 +84,63 @@ export default function DashboardPage() {
     (driver) => driver.busID === "0"
   );
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [experience, setExperience] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [interest, setInterest] = useState("");
+  const [country, setCountry] = useState("");
+  const [website, setWebsite] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const onSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(`${serverUrl}/driver/register`, {
+        name,
+        email,
+        phone,
+        experience,
+        qualification,
+        interest,
+        country,
+        website,
+      });
+
+      alert("Application sent Successfully");
+      setSubmitted(true);
+
+      // Clear the form inputs
+      setName("");
+      setEmail("");
+      setPhone("");
+      setExperience("");
+      setQualification("");
+      setInterest("");
+      setCountry("");
+      setWebsite("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const [drivers, setDrivers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/driver/");
+        const data = await response.json();
+        setDrivers(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       {/* <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
@@ -103,12 +162,6 @@ export default function DashboardPage() {
             <TabsList className="md:flex md:text-xl md:justify-start grid grid-cols-3 md:pb-1 pb-[5.2rem] md:px-1 px-2">
               <TabsTrigger
                 className="md:my-0 my-1 mr-1 md:mr-0"
-                value="overview"
-              >
-                Overview
-              </TabsTrigger>
-              <TabsTrigger
-                className="md:my-0 my-1 mr-1 md:mr-0"
                 value="adddrivers"
               >
                 Add Drivers
@@ -128,133 +181,11 @@ export default function DashboardPage() {
               >
                 Vehicles
               </TabsTrigger>
-              <TabsTrigger className="md:my-0 my-1" value="map">
-                Map
+              <TabsTrigger className="md:my-0 my-1" value="app">
+                Application
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="overview" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
-                      Welcome
-                    </CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                    </svg>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
-                      {userName || "User"}
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
-                      Total Drivers
-                    </CardTitle>
 
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
-                      {driverInformation.length}
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
-                      Total Vehicles
-                    </CardTitle>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M0 5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v2h-2V5H2v7h6v2H2v4h6v2H5.414L3.5 21.914L2.086 20.5l.5-.5H2a2 2 0 0 1-2-2V5Zm11.323 3h10.354L24 13.807V21.5h-2V20H11v1.5H9v-7.693L11.323 8ZM11 18h11v-3.807L21.923 14H11.077l-.077.193V18Zm.877-6h9.246l-.8-2h-7.646l-.8 2ZM3 15h2.004v2.004H3V15Zm9 0h2.004v2.004H12V15Zm7 0h2.004v2.004H19V15Z"
-                      />
-                    </svg>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
-                      {vehicleInformation.length}
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">
-                      Available Drivers
-                    </CardTitle>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="15"
-                      height="15"
-                      viewBox="0 0 20 20"
-                      className="h-4 w-4 text-muted-foreground"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M5 6a4 4 0 1 1 8 0a4 4 0 0 1-8 0Zm-3 7c0-1.113.903-2 2.009-2h6.248A5.477 5.477 0 0 0 9 14.5c0 1.303.453 2.5 1.21 3.443c-.395.038-.8.057-1.21.057c-1.855 0-3.583-.386-4.865-1.203C2.833 15.967 2 14.69 2 13Zm17 1.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm-2.146-1.854a.5.5 0 0 0-.708 0L13.5 15.293l-.646-.647a.5.5 0 0 0-.708.708l1 1a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0 0-.708Z"
-                      />
-                    </svg>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
-                      {driversWithBusIDZero.length}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
-                  <CardHeader>
-                    <CardTitle>Fuel Prices</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pl-2">
-                    <Overview />
-                  </CardContent>
-                </Card>
-                <Card className="col-span-4 lg:col-span-3">
-                  <CardHeader>
-                    <CardTitle>Active Drivers</CardTitle>
-                    <CardDescription>Driver information</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <RecentSales />
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
             <TabsContent value="adddrivers" className="space-y-4">
               <AddDriver />
             </TabsContent>
@@ -267,8 +198,8 @@ export default function DashboardPage() {
             <TabsContent value="vehicles" className="space-y-4">
               <DisplayVehicle />
             </TabsContent>
-            <TabsContent value="map" className="space-y-4">
-              <Map />
+            <TabsContent value="app" className="space-y-4">
+              <DriverInfo drivers={drivers} />
             </TabsContent>
           </Tabs>
         </div>
