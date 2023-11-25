@@ -10,42 +10,58 @@ export { router as driverRouter };
 router.post("/register", async (req, res) => {
   // Extract email, username, password, and additional fields from the request body
   const {
+    // email,
+    // username,
+    // password,
+    // phone,
+    // birthdate,
+    // imageUrl,
+    // license,
+    // busID,
+    // routeID,
+    // experience,
+    // bio,
+    name,
     email,
-    username,
-    password,
     phone,
-    birthdate,
-    imageUrl,
-    license,
-    busID,
-    routeID,
     experience,
-    bio,
+    qualification,
+    interest,
+    country,
+    website,
   } = req.body;
 
   // Check if a driver with the same username already exists
-  const driver = await DriverModel.findOne({ username });
+  // const driver = await DriverModel.findOne({ username });
 
-  if (driver) {
-    return res.json({ message: "Driver already exists!" });
-  }
+  // if (driver) {
+  //   return res.json({ message: "Driver already exists!" });
+  // }
 
   // Hash the password using bcrypt
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create a new driver with the hashed password and additional fields, and save it to the database
   const newDriver = new DriverModel({
+    // email,
+    // username,
+    // phone,
+    // password: hashedPassword,
+    // birthdate,
+    // imageUrl,
+    // license,
+    // busID,
+    // routeID,
+    // experience,
+    // bio,
+    name,
     email,
-    username,
     phone,
-    password: hashedPassword,
-    birthdate,
-    imageUrl,
-    license,
-    busID,
-    routeID,
     experience,
-    bio,
+    qualification,
+    interest,
+    country,
+    website,
   });
   await newDriver.save();
 
