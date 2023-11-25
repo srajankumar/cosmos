@@ -37,27 +37,32 @@ const DriverSchema = new mongoose.Schema(
 
     experience: {
       type: String,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a experience"],
     },
 
     qualification: {
       type: String,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a qualification"],
     },
 
     interest: {
       type: String,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a interest"],
     },
 
     country: {
       type: String,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a country"],
     },
 
     website: {
       type: String,
-      required: [true, "Please add a name"],
+      required: [true, "Please add a website"],
+    },
+
+    selected: {
+      type: String,
+      default: "-1",
     },
 
     // Password of the driver

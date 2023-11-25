@@ -20,6 +20,7 @@ export default function DriverRegister() {
   const [interest, setInterest] = useState("");
   const [country, setCountry] = useState("");
   const [website, setWebsite] = useState("");
+  const [selected, setSelected] = useState("");
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -34,7 +35,9 @@ export default function DriverRegister() {
         interest,
         country,
         website,
+        selected: "-1",
       });
+
       alert("Application sent Successfully");
 
       // Clear the form inputs

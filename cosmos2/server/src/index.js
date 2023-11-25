@@ -23,11 +23,11 @@ app.use("/driver", driverRouter); // Routes for drivers
 app.use("/driver", infoRouter); // Routes for driver information
 app.use("/vehicle", vehicleRouter); // Routes for vehicle information
 // app.use("/duration",duration)
-app.post('/storeDuration', async (req, res) => {
+app.post("/storeDuration", async (req, res) => {
   const duration = req.body.formattedDuration;
   // Store the duration in a database or perform other processing
-  console.log('Received session duration:', duration);
-  res.send({ message: 'Duration received successfully' });
+  console.log("Received session duration:", duration);
+  res.send({ message: "Duration received successfully" });
 });
 
 // Connect to MongoDB using the provided URI
