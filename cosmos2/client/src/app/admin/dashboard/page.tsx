@@ -40,6 +40,7 @@ import AddVehicle from "@/components/admin/AddVehicle";
 import DriverInfo from "@/components/employee/EmployeeInfo";
 import AcceptedEmployees from "@/components/employee/AcceptedEmployees";
 import RejectedEmployees from "@/components/employee/RejectedEmployees";
+import EmployeeSearch from "@/components/employee/employeeSearch";
 
 export default function DashboardPage() {
   const [driverInformation, setDriverInformation] = useState<DriverInfo[]>([]);
@@ -176,19 +177,21 @@ export default function DashboardPage() {
                 DB
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="overview" className="space-y-4">
-              <div>
-                <div className="bg-pink-500/10 dark:bg-pink-200 rounded-2xl flex flex-col lg:w-1/2 w-full items-center mt-7 py-5">
+            <TabsContent value="overview" className="space-y-4 space-x-6 flex">
+              <div className="lg:w-1/2 w-full">
+                <div className="bg-pink-500/10 dark:bg-pink-200 rounded-2xl flex flex-col items-center mt-7 py-5">
                   <p className="text-3xl font-medium text-gray-500">Welcome,</p>
                   <p className="text-3xl font-medium dark:text-black">
                     {userName}
                   </p>
                 </div>
-                <div className="lg:w-1/2 w-full pt-5">
+                <div className="pt-5">
                   <EmployeeList drivers={drivers} />
                 </div>
               </div>
-              <div></div>
+              <div className="flex pt-2 lg:w-1/2 w-full">
+                <EmployeeSearch drivers={drivers} />
+              </div>
             </TabsContent>
             <TabsContent value="onboard" className="space-y-4">
               <AcceptedEmployees drivers={drivers} />
