@@ -20,7 +20,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
+
+const AcceptedEmployees: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
   const cardColors = [
     "bg-blue-200",
     "bg-green-200",
@@ -65,7 +66,7 @@ const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
       <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4">
         {drivers.map(
           (driver, index) =>
-            driver.selected === "-1" && (
+            driver.selected === "1" && (
               <DriverCard
                 key={driver._id}
                 driver={driver}
@@ -137,9 +138,9 @@ const DriverCard: React.FC<DriverCardProps> = ({
         </Accordion>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button onClick={onSelect}>Select</Button>
+        {/* <Button onClick={onSelect}>Select</Button> */}
         <Button variant="destructive" onClick={onDelete}>
-          Delete
+          Kick out!!
         </Button>
       </CardFooter>
     </Card>
@@ -157,4 +158,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 };
 
-export default DriversPage;
+export default AcceptedEmployees;
