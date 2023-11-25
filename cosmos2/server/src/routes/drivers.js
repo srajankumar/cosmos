@@ -7,21 +7,9 @@ import mongoose from "mongoose";
 const router = express.Router();
 export { router as driverRouter };
 
-// User Registration Route
 router.post("/register", async (req, res) => {
   // Extract email, username, password, and additional fields from the request body
   const {
-    // email,
-    // username,
-    // password,
-    // phone,
-    // birthdate,
-    // imageUrl,
-    // license,
-    // busID,
-    // routeID,
-    // experience,
-    // bio,
     name,
     email,
     phone,
@@ -30,45 +18,34 @@ router.post("/register", async (req, res) => {
     interest,
     country,
     website,
+    password,
     selected,
   } = req.body;
 
-  // Check if a driver with the same username already exists
-  // const driver = await DriverModel.findOne({ username });
+  try {
+    // Hash the password using bcrypt
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  // if (driver) {
-  //   return res.json({ message: "Driver already exists!" });
-  // }
+    // Create a new driver with the hashed password and additional fields, and save it to the database
+    const newDriver = new DriverModel({
+      name,
+      email,
+      phone,
+      experience,
+      qualification,
+      interest,
+      country,
+      website,
+      password: hashedPassword,
+      selected,
+    });
+    await newDriver.save();
 
-  // Hash the password using bcrypt
-  // const hashedPassword = await bcrypt.hash(password, 10);
-
-  // Create a new driver with the hashed password and additional fields, and save it to the database
-  const newDriver = new DriverModel({
-    // email,
-    // username,
-    // phone,
-    // password: hashedPassword,
-    // birthdate,
-    // imageUrl,
-    // license,
-    // busID,
-    // routeID,
-    // experience,
-    // bio,
-    name,
-    email,
-    phone,
-    experience,
-    qualification,
-    interest,
-    country,
-    website,
-    selected,
-  });
-  await newDriver.save();
-
-  res.json({ message: "Driver registered successfully!" });
+    res.json({ message: "Driver registered successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 // Example route handling the DELETE request
@@ -123,12 +100,19 @@ router.post("/login", async (req, res) => {
 
   // Find the driver with the provided username
   const driver = await DriverModel.findOne({ username });
+
   if (!driver) {
     return res.json({ message: "Driver Doesn't exist" });
   }
 
+  // Check if 'password' is defined
+  if (!password) {
+    return res.json({ message: "Password is missing" });
+  }
+
   // Compare the provided password with the stored hashed password using bcrypt
   const isPasswordValid = await bcrypt.compare(password, driver.password);
+
   if (!isPasswordValid) {
     return res.json({ message: "Username or password is incorrect!" });
   }
