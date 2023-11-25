@@ -3,6 +3,7 @@ import React from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
+
 const DriverAuthButton = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
 
@@ -22,7 +23,7 @@ const DriverAuthButton = () => {
       const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
       // Show alert with session duration
       // alert(`You were signed in for: ${formattedDuration}`);
-      await axios.post(`${serverUrl}/storeDuration`, {
+      await axios.post(`${serverUrl}/storeDuration/time`, {
         formattedDuration,
       });
     }
