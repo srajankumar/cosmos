@@ -137,3 +137,28 @@ router.post("/login", async (req, res) => {
   const token = jwt.sign({ id: driver._id }, "secret");
   res.json({ token, userID: driver._id });
 });
+
+router.patch("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+
+  try {
+    const updatedDriver = await DriverModel.findByIdAndUpdate(
+      id,
+      { selected: req.body.selected },
+      { new: true }
+    );
+
+    if (!updatedDriver) {
+      return res.status(404).json({ message: "Driver not found" });
+    }
+
+    res.status(200).json(updatedDriver);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
