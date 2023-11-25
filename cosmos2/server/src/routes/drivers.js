@@ -68,6 +68,32 @@ router.post("/register", async (req, res) => {
   res.json({ message: "Driver registered successfully!" });
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const driver = await DriverModel.findById(req.params.id);
+
+    if (!driver) {
+      return res.status(404).json({ message: "Driver not found" });
+    }
+
+    res.json(driver);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+// Get all drivers
+router.get("/", async (req, res) => {
+  try {
+    const drivers = await DriverModel.find();
+    res.json(drivers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 // User Login Route
 router.post("/login", async (req, res) => {
   // Extract username and password from the request body

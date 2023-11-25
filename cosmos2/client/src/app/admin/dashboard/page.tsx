@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -32,6 +32,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 
@@ -44,6 +45,7 @@ import AddDriver from "@/components/admin/AddDriver";
 import DisplayDriver from "@/components/admin/DisplayDriver";
 import DisplayVehicle from "@/components/admin/DisplayVehicle";
 import AddVehicle from "@/components/admin/AddVehicle";
+import DriverInfo from "@/components/employee/EmployeeInfo";
 
 export default function DashboardPage() {
   const [driverInformation, setDriverInformation] = useState<DriverInfo[]>([]);
@@ -82,6 +84,63 @@ export default function DashboardPage() {
     (driver) => driver.busID === "0"
   );
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [experience, setExperience] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [interest, setInterest] = useState("");
+  const [country, setCountry] = useState("");
+  const [website, setWebsite] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const onSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(`${serverUrl}/driver/register`, {
+        name,
+        email,
+        phone,
+        experience,
+        qualification,
+        interest,
+        country,
+        website,
+      });
+
+      alert("Application sent Successfully");
+      setSubmitted(true);
+
+      // Clear the form inputs
+      setName("");
+      setEmail("");
+      setPhone("");
+      setExperience("");
+      setQualification("");
+      setInterest("");
+      setCountry("");
+      setWebsite("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const [drivers, setDrivers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/driver/");
+        const data = await response.json();
+        setDrivers(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       {/* <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
@@ -133,7 +192,7 @@ export default function DashboardPage() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {/* <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
@@ -253,7 +312,8 @@ export default function DashboardPage() {
                     <RecentSales />
                   </CardContent>
                 </Card>
-              </div>
+              </div> */}
+              <DriverInfo drivers={drivers} />
             </TabsContent>
             <TabsContent value="adddrivers" className="space-y-4">
               <AddDriver />
