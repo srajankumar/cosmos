@@ -66,12 +66,12 @@ const DriverSchema = new mongoose.Schema(
     },
 
     // Password of the driver
-    // password: {
-    //   type: String,
-    //   required: [true, "Please add a password"],
-    //   // Password length constraints
-    //   minLength: [6, "Password must be at least 6 characters"],
-    // },
+    password: {
+      type: String,
+      required: [true, "Please add a password"],
+      //   // Password length constraints
+      //   minLength: [6, "Password must be at least 6 characters"],
+    },
 
     savedInfo: [{ type: mongoose.Schema.Types.ObjectId, ref: "drivers" }],
   },

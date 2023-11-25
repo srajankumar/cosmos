@@ -26,7 +26,7 @@ export default function DriverLogin() {
   const startTimer = () => {
     // Get the current timestamp and store it in localStorage
     const startTime = Date.now();
-    window.localStorage.setItem('timerStartTime', startTime.toString());
+    window.localStorage.setItem("timerStartTime", startTime.toString());
   };
 
   const onSubmit = async (event: SyntheticEvent) => {
@@ -43,7 +43,7 @@ export default function DriverLogin() {
       window.localStorage.setItem("userID", response.data.userID);
       startTimer();
 
-      window.location.href = "/driver/dashboard";
+      window.location.href = "/employee/dashboard";
     } catch (err) {
       console.error(err);
     }
