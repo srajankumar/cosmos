@@ -20,8 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-const AcceptedEmployees: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
+const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
   const cardColors = [
     "bg-blue-200",
     "bg-green-200",
@@ -63,7 +62,7 @@ const AcceptedEmployees: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
   return (
     <div>
       {/* <h1 className="text-xl pb-5 pt-3 font-semibold">Driver List</h1> */}
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 pt-1 gap-5">
         {drivers.map(
           (driver, index) =>
             driver.selected === "1" && (
@@ -113,7 +112,7 @@ const DriverCard: React.FC<DriverCardProps> = ({
         <CardTitle>{driver.name}</CardTitle>
         <CardDescription>{driver.interest}</CardDescription>
       </CardHeader>
-      <CardContent>
+      {/* <CardContent>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>{driver.experience} Years</AccordionTrigger>
@@ -136,13 +135,13 @@ const DriverCard: React.FC<DriverCardProps> = ({
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        {/* <Button onClick={onSelect}>Select</Button> */}
+      </CardContent> */}
+      {/* <CardFooter className="flex justify-between">
+        <Button onClick={onSelect}>Select</Button>
         <Button variant="destructive" onClick={onDelete}>
-          Kick out!!
+          Delete
         </Button>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 };
@@ -158,4 +157,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 };
 
-export default AcceptedEmployees;
+export default DriversPage;

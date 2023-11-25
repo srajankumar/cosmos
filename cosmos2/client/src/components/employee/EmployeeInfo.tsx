@@ -61,7 +61,7 @@ const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
 
   return (
     <div>
-      <h1 className="text-xl pb-5 pt-3 font-semibold">Driver List</h1>
+      {/* <h1 className="text-xl pb-5 pt-3 font-semibold">Driver List</h1> */}
       <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4">
         {drivers.map(
           (driver, index) =>

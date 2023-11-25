@@ -5,6 +5,8 @@ import { useCookies } from "react-cookie";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
+import { Workflow } from "lucide-react";
+
 interface DriverInfo {
   _id: string;
   name: string;
@@ -22,6 +24,8 @@ interface VehicleInfo {
   plateNumber: string;
   color: string;
 }
+
+import EmployeeList from "@/components/employee/employeeList";
 
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -136,54 +140,55 @@ export default function DashboardPage() {
       <div className="flex-col flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+            <div className="flex space-x-4 justify-center items-center">
+              <Workflow className="w-10 h-10 p-1.5 rounded-lg bg-gradient-to-br from-violet-400 text-white to-violet-800" />
+              <h2 className="text-2xl font-bold tracking-tight">Cosmos</h2>
+            </div>
             <div className="flex items-center space-x-2">
-              <div className="md:flex hidden">
-                <CalendarDateRangePicker />
-              </div>
               <AuthButton />
               <ThemeToggle />
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList className="md:flex md:text-xl md:justify-start grid grid-cols-3 md:pb-1 pb-[5.2rem] md:px-1 px-2">
+            <TabsList className="md:flex rounded-full md:text-xl md:justify-start grid grid-cols-3 py-8">
               <TabsTrigger
-                className="md:my-0 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg rounded-full ml-3 px-10 py-2 my-1 mr-1 md:mr-0"
                 value="overview"
               >
                 Overview
               </TabsTrigger>
               <TabsTrigger
-                className="md:my-0 my-1 mr-1 md:mr-0"
-                value="adddrivers"
-              >
-                Add Drivers
-              </TabsTrigger>
-              <TabsTrigger className="md:my-0 my-1" value="drivers">
-                Drivers
-              </TabsTrigger>
-              <TabsTrigger
-                className="md:my-0 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
                 value="onboard"
               >
                 Onboard
               </TabsTrigger>
-              <TabsTrigger className="md:my-0 my-1" value="waiting">
+              <TabsTrigger
+                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1"
+                value="waiting"
+              >
                 Waiting
               </TabsTrigger>
               <TabsTrigger
-                className="md:my-0 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
                 value="rejected"
               >
                 DB
               </TabsTrigger>
             </TabsList>
-
-            <TabsContent value="adddrivers" className="space-y-4">
-              <AddDriver />
-            </TabsContent>
-            <TabsContent value="drivers" className="space-y-4">
-              <DisplayDriver />
+            <TabsContent value="overview" className="space-y-4">
+              <div>
+                <div className="bg-pink-500/10 dark:bg-pink-200 rounded-2xl flex flex-col lg:w-1/2 w-full items-center mt-7 py-5">
+                  <p className="text-3xl font-medium text-gray-500">Welcome,</p>
+                  <p className="text-3xl font-medium dark:text-black">
+                    {userName}
+                  </p>
+                </div>
+                <div className="lg:w-1/2 w-full pt-5">
+                  <EmployeeList drivers={drivers} />
+                </div>
+              </div>
+              <div></div>
             </TabsContent>
             <TabsContent value="onboard" className="space-y-4">
               <AcceptedEmployees drivers={drivers} />

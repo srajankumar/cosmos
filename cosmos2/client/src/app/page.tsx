@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import ModeToggle from "@/components/ThemeToggle";
 import Link from "next/link";
 import { Github } from "lucide-react";
-import Form from "@/components/Onboard/Form";
+import Form from "@/components/onboard/Form";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const page = () => {
