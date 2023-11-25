@@ -20,8 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-const AcceptedEmployees: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
+const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
   const cardColors = [
     "bg-blue-200",
     "bg-green-200",
@@ -63,10 +62,10 @@ const AcceptedEmployees: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
   return (
     <div>
       {/* <h1 className="text-xl pb-5 pt-3 font-semibold">Driver List</h1> */}
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4">
+      <div className="pt-1 w-full">
         {drivers.map(
           (driver, index) =>
-            driver.selected === "1" && (
+            driver.selected === "-1" && (
               <DriverCard
                 key={driver._id}
                 driver={driver}
@@ -113,36 +112,6 @@ const DriverCard: React.FC<DriverCardProps> = ({
         <CardTitle>{driver.name}</CardTitle>
         <CardDescription>{driver.interest}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>{driver.experience} Years</AccordionTrigger>
-            <AccordionContent>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Email: {driver.email}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Phone: {driver.phone}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Qualification: {driver.qualification}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Country: {driver.country}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Website: {driver.website}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        {/* <Button onClick={onSelect}>Select</Button> */}
-        <Button variant="destructive" onClick={onDelete}>
-          Kick out!!
-        </Button>
-      </CardFooter>
     </Card>
   );
 };
@@ -158,4 +127,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 };
 
-export default AcceptedEmployees;
+export default DriversPage;

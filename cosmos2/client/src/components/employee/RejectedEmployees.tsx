@@ -294,7 +294,7 @@ const RejectedEmployees: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
 
   return (
     <div>
-      <h1 className="text-xl pb-5 pt-3 font-semibold">Driver List</h1>
+      {/* <h1 className="text-xl pb-5 pt-3 font-semibold">Driver List</h1> */}
       <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4">
         {driversList.map(
           (driver, index) =>
@@ -371,9 +371,9 @@ const DriverCard: React.FC<DriverCardProps> = ({
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button onClick={onSelect}>Change of mind?</Button>
-        <Button variant="destructive" onClick={onDelete}>
+        {/* <Button variant="destructive" onClick={onDelete}>
           Delete
-        </Button>
+        </Button> */}
       </CardFooter>
     </Card>
   );

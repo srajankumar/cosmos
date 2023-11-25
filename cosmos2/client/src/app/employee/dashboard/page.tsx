@@ -7,6 +7,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 import AuthButton from "@/components/employeee/AuthButton";
 
+
 // DashboardPage component
 export default function DashboardPage() {
   // State to manage the visibility of the popup
