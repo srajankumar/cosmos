@@ -40,4 +40,4 @@ const UserSchema = new mongoose.Schema(
 );
 
 // Create a User model based on the schema
-export const UserModel = mongoose.model("Admin", UserSchema);
+export const UserModel = mongoose.model("admin", UserSchema);
