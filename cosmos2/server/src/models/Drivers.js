@@ -4,11 +4,18 @@ import mongoose from "mongoose";
 const DriverSchema = new mongoose.Schema(
   {
     // Name of the Driver
-    username: {
+    // username: {
+    //   type: String,
+    //   required: [true, "Please add a name"],
+    // },
+
+    // Name
+    name: {
       type: String,
       required: [true, "Please add a name"],
     },
-    // Email of the driver
+
+    // Email
     email: {
       type: String,
       required: [true, "Please add an email"],
@@ -20,19 +27,47 @@ const DriverSchema = new mongoose.Schema(
         "Please enter a valid email",
       ],
     },
-    // Password of the driver
-    password: {
-      type: String,
-      required: [true, "Please add a password"],
-      // Password length constraints
-      minLength: [6, "Password must be at least 6 characters"],
-    },
+
     // Phone of the driver
     phone: {
       type: String,
       required: [true, "Please add a phone number"],
       default: "+91",
     },
+
+    experience: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
+
+    qualification: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
+
+    interest: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
+
+    country: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
+
+    website: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
+
+    // Password of the driver
+    // password: {
+    //   type: String,
+    //   required: [true, "Please add a password"],
+    //   // Password length constraints
+    //   minLength: [6, "Password must be at least 6 characters"],
+    // },
+
     savedInfo: [{ type: mongoose.Schema.Types.ObjectId, ref: "drivers" }],
   },
   {
