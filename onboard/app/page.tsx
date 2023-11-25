@@ -1,18 +1,32 @@
-import AuthForm from './auth-form'
+"use client";
+import { useState } from "react";
+import Link from "next/link";
 
-export default function Home() {
+const Home = () => {
+  const [policyAccepted, setPolicyAccepted] = useState(false);
+
+  const handlePolicyChange = (event: {
+    target: { checked: boolean | ((prevState: boolean) => boolean) };
+  }) => {
+    setPolicyAccepted(event.target.checked);
+  };
+
   return (
-    <div className="row">
-      <div className="col-6">
-        <h1 className="header">Supabase Auth + Storage</h1>
-        <p className="">
-          Experience our Auth and Storage through a simple profile management example. Create a user
-          profile and upload an avatar image. Fast, simple, secure.
-        </p>
-      </div>
-      <div className="col-6 auth-widget">
-        <AuthForm />
-      </div>
-    </div>
-  )
-}
+    <main className="policy-container">
+      <h2 className="">Company Policy</h2>
+      <p>
+        This is the company policy. Please read it carefully and click the
+        checkbox below to accept.
+      </p>
+      <input type="checkbox" id="acceptPolicy" onChange={handlePolicyChange} />{" "}
+      <label htmlFor="acceptPolicy">I accept the company policy.</label>
+      <Link href="/form" passHref>
+        <button id="formButton" disabled={!policyAccepted}>
+          Go to Form
+        </button>
+      </Link>
+    </main>
+  );
+};
+
+export default Home;
