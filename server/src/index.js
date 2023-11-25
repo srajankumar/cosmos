@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { userRouter } from "./routes/admin.js";
+import { employeeRouter } from "./routes/employee.js";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/auth", userRouter); // Authentication-related routes
+app.use("/employee", employeeRouter); // Routes for drivers
 
 // Connect to MongoDB using the provided URI
 mongoose.connect(process.env.MONGO_URI, {

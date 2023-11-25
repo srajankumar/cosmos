@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-// Define a MongoDB schema for user data
-const UserSchema = new mongoose.Schema(
+// Define a MongoDB schema for driver data
+const EmployeeSchema = new mongoose.Schema(
   {
-    // Name of the user
+    // Name of the Driver
     username: {
       type: String,
       required: [true, "Please add a name"],
     },
-    // Email of the user
+    // Email of the driver
     email: {
       type: String,
       required: [true, "Please add an email"],
@@ -20,18 +20,20 @@ const UserSchema = new mongoose.Schema(
         "Please enter a valid email",
       ],
     },
-    // Password of the user
+    // Password of the driver
     password: {
       type: String,
       required: [true, "Please add a password"],
       // Password length constraints
       minLength: [6, "Password must be at least 6 characters"],
     },
+    // Phone of the driver
     phone: {
       type: String,
       required: [true, "Please add a phone number"],
       default: "+91",
     },
+    savedInfo: [{ type: mongoose.Schema.Types.ObjectId, ref: "employees" }],
   },
   {
     // Automatically add 'createdAt' and 'updatedAt' timestamps
@@ -39,5 +41,5 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-// Create a User model based on the schema
-export const UserModel = mongoose.model("Admin", UserSchema);
+// Create a Driver model based on the schema
+export const EmployeeModel = mongoose.model("employees", EmployeeSchema);
