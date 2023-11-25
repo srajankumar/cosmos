@@ -10,23 +10,38 @@ import AuthButton from "@/components/employee/AuthButton";
 
 export default function DashboardPage() {
   const [popupVisible, setPopupVisible] = useState(false);
-  const [disablePopup, setDisablePopup] = useState(false);
+  const [logoutTimer, setLogoutTimer] = useState(null);
 
-  // Function to show pop-up
   const showPopup = () => {
-    if (!disablePopup) {
-      setPopupVisible(true);
+    setPopupVisible(true);
 
-      // Hide the pop-up after 5 seconds
-      const popupTimeout = setTimeout(() => {
-        setPopupVisible(false);
+    // Set a timer for 5 seconds
+    setLogoutTimer(
+      setTimeout(() => {
+        // Trigger logout and redirect after 5 seconds of inactivity
+        logoutAndRedirect();
+      }, 5000)
+    );
+  };
 
-        // Enable pop-up after 10 seconds
-        setTimeout(() => {
-          setDisablePopup(false);
-        }, 10000);
-      }, 5000);
-    }
+  const handlePopupInteraction = () => {
+    setPopupVisible(false);
+
+    // Clear the logout timer when the user interacts with the popup
+    clearTimeout(logoutTimer);
+
+    // Set a new timer to enable the popup after 10 seconds
+    setTimeout(() => {
+      showPopup();
+    }, 10000);
+  };
+
+  const logoutAndRedirect = () => {
+    // Remove user token (replace this with your actual logic)
+    localStorage.removeItem("userToken");
+
+    // Redirect to the specified page
+    window.location.href = "/";
   };
 
   // Effect to show pop-up every 5 seconds
@@ -37,38 +52,21 @@ export default function DashboardPage() {
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
-  }, [disablePopup]);
-
-  // Function to handle close button click
-  const handlePopupInteraction = () => {
-    setPopupVisible(false);
-
-    // Enable pop-up after 10 seconds
-    setTimeout(() => {
-      setDisablePopup(false);
-    }, 10000);
-  };
-
-  // Function to handle logout and redirect
-  const logoutAndRedirect = () => {
-    // Remove user token (replace this with your actual logic)
-    localStorage.removeItem("userToken");
-
-    // Redirect to the specified page
-    window.location.href = "/";
-  };
+  }, []);
 
   // Effect to trigger logout if the user doesn't interact with the pop-up
   useEffect(() => {
     if (popupVisible) {
-      // Set a timeout for 4 seconds
-      const logoutTimeout = setTimeout(() => {
-        // Trigger logout and redirect if the user doesn't interact with the pop-up
-        logoutAndRedirect();
-      }, 4000);
+      // Set a timer for 5 seconds
+      setLogoutTimer(
+        setTimeout(() => {
+          // Trigger logout and redirect after 5 seconds of inactivity
+          logoutAndRedirect();
+        }, 5000)
+      );
 
-      // Cleanup timeout on pop-up interaction or component unmount
-      return () => clearTimeout(logoutTimeout);
+      // Cleanup timer on component unmount
+      return () => clearTimeout(logoutTimer);
     }
   }, [popupVisible]);
 
