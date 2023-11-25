@@ -1,17 +1,21 @@
 "use client";
+// Import necessary modules
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
-
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
-
 import AuthButton from "@/components/employeee/AuthButton";
 
+// DashboardPage component
 export default function DashboardPage() {
+  // State to manage the visibility of the popup
   const [popupVisible, setPopupVisible] = useState(false);
-  const [logoutTimer, setLogoutTimer] = useState(null);
 
+  // State to manage the logout timer
+  const [logoutTimer, setLogoutTimer] = useState<NodeJS.Timeout | null>(null);
+
+  // Function to show the popup
   const showPopup = () => {
     setPopupVisible(true);
 
@@ -24,18 +28,24 @@ export default function DashboardPage() {
     );
   };
 
+  // Function to handle popup interaction
   const handlePopupInteraction = () => {
     setPopupVisible(false);
 
     // Clear the logout timer when the user interacts with the popup
-    clearTimeout(logoutTimer);
+    if (logoutTimer) {
+      clearTimeout(logoutTimer);
+    }
 
     // Set a new timer to enable the popup after 10 seconds
-    setTimeout(() => {
-      showPopup();
-    }, 10000);
+    setLogoutTimer(
+      setTimeout(() => {
+        showPopup();
+      }, 10000)
+    );
   };
 
+  // Function to handle logout and redirect
   const logoutAndRedirect = () => {
     // Remove user token (replace this with your actual logic)
     localStorage.removeItem("userToken");
@@ -44,41 +54,37 @@ export default function DashboardPage() {
     window.location.href = "/";
   };
 
-  // Effect to show pop-up every 5 seconds
+  // Effect to show the popup every 5 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
       showPopup();
-    }, 5000);
+    }, 10000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
-  // Effect to trigger logout if the user doesn't interact with the pop-up
+  // Effect to trigger logout if the user doesn't interact with the popup
   useEffect(() => {
     if (popupVisible) {
       // Set a timer for 5 seconds
-      setLogoutTimer(
-        setTimeout(() => {
-          // Trigger logout and redirect after 5 seconds of inactivity
-          logoutAndRedirect();
-        }, 5000)
-      );
+      const timeoutId = setTimeout(() => {
+        // Trigger logout and redirect after 5 seconds of inactivity
+        logoutAndRedirect();
+      }, 5000);
 
-      // Cleanup timer on component unmount
-      return () => clearTimeout(logoutTimer);
+      // Cleanup timer on component unmount or popup interaction
+      return () => clearTimeout(timeoutId);
     }
   }, [popupVisible]);
 
+  // Retrieve username from cookies
   const [cookies] = useCookies(["username"]);
   const loginName = cookies.username;
 
+  // JSX structure
   return (
     <>
-      {/* <div className="md:hidden flex w-full h-screen justify-center items-center text-3xl font-bold">
-        <h1>Not Supported</h1>
-      </div> */}
-
       {popupVisible && (
         <div className="popup">
           <h2>Attention!</h2>
