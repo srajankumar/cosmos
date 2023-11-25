@@ -1,10 +1,10 @@
-import DriverLogin from "@/components/driver/DriverLogin";
+import Login from "@/components/employeee/Login";
 import React from "react";
 
 const page = () => {
   return (
     <div className="flex justify-center items-center h-screen">
-      <DriverLogin />
+      <Login />
     </div>
   );
 };

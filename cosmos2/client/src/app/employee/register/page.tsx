@@ -1,10 +1,10 @@
-import DriverRegister from "@/components/driver/DriverRegister";
+import Register from "@/components/employeee/Register";
 import React from "react";
 
 const page = () => {
   return (
     <div className="flex justify-center items-center h-screen">
-      <DriverRegister />
+      <Register />
     </div>
   );
 };
