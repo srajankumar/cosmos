@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://cosmos.vercel.app",
+    url: "https://thecosmos.vercel.app",
     title: "Cosmos",
     description: "Elevating workforce dynamics.",
     siteName: "Cosmos",
     images: [
       {
-        url: "https://cosmos.vercel.app/og.png",
+        url: "https://thecosmos.vercel.app/og.png",
         width: 1200,
         height: 630,
         alt: "Cosmos",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cosmos",
     description: "Elevating workforce dynamics.",
-    images: "https://cosmos.vercel.app/og.png",
+    images: "https://thecosmos.vercel.app/og.png",
   },
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },

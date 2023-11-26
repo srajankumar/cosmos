@@ -3,12 +3,11 @@ import React from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
-
 const DriverAuthButton = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
 
-  const logout = async() => {
-    const startTime = window.localStorage.getItem('timerStartTime');
+  const logout = async () => {
+    const startTime = window.localStorage.getItem("timerStartTime");
     if (startTime) {
       // Calculate session duration
       const endTime = Date.now();
@@ -22,7 +21,8 @@ const DriverAuthButton = () => {
       const formattedDuration = `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
       const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
       // Show alert with session duration
-      // alert(`You were signed in for: ${formattedDuration}`);
+      alert(`You were signed in for: ${formattedDuration}`);
+      // alert(formattedDuration);
       await axios.post(`${serverUrl}/storeDuration/time`, {
         formattedDuration,
       });
