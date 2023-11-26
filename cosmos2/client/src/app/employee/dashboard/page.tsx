@@ -5,8 +5,7 @@ import { useState, useEffect } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
-import AuthButton from "@/components/employeee/AuthButton";
-
+import AuthButton from "@/components/employee/AuthButton";
 
 // DashboardPage component
 export default function DashboardPage() {
