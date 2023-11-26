@@ -33,10 +33,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker";
 
 import AuthButton from "@/components/admin/AuthButton";
-import AddDriver from "@/components/admin/AddDriver";
-import DisplayDriver from "@/components/admin/DisplayDriver";
-import DisplayVehicle from "@/components/admin/DisplayVehicle";
-import AddVehicle from "@/components/admin/AddVehicle";
 import DriverInfo from "@/components/employee/EmployeeInfo";
 import AcceptedEmployees from "@/components/employee/AcceptedEmployees";
 import RejectedEmployees from "@/components/employee/RejectedEmployees";
