@@ -10,7 +10,7 @@ import Image from "next/image";
 
 import { Workflow } from "lucide-react";
 
-const page = () => {
+const Page = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleTermsChange = () => {
@@ -81,4 +81,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
