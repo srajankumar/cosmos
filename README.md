@@ -4,7 +4,7 @@
 
 ## About
 
-A workforce management app created for Smart Nitte Hackathon 2023
+A workforce management app.
 
 ## Features
 

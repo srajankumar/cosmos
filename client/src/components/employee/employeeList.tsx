@@ -3,15 +3,6 @@ import axios from "axios";
 
 import mongoose from "mongoose";
 
-import { Button } from "@/components/ui/button";
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
 import {
   Card,
   CardContent,
@@ -112,43 +103,14 @@ const DriverCard: React.FC<DriverCardProps> = ({
         <CardTitle>{driver.name}</CardTitle>
         <CardDescription>{driver.interest}</CardDescription>
       </CardHeader>
-      {/* <CardContent>
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>{driver.experience} Years</AccordionTrigger>
-            <AccordionContent>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Email: {driver.email}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Phone: {driver.phone}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Qualification: {driver.qualification}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Country: {driver.country}
-              </div>
-              <div className="flex flex-col space-y-1.5 tracking-wide">
-                Website: {driver.website}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </CardContent> */}
-      {/* <CardFooter className="flex justify-between">
-        <Button onClick={onSelect}>Select</Button>
-        <Button variant="destructive" onClick={onDelete}>
-          Delete
-        </Button>
-      </CardFooter> */}
     </Card>
   );
 };
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const response = await axios.get("http://localhost:3001/driver/");
+    const response = await axios.get(`${serverUrl}/driver/`);
     const drivers: Driver[] = response.data;
     return { props: { drivers } };
   } catch (error) {

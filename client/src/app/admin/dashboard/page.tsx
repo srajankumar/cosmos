@@ -122,7 +122,7 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/driver/");
+        const response = await fetch(`${serverUrl}/driver/`);
         const data = await response.json();
         setDrivers(data);
       } catch (error) {

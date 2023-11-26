@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState } from "react";
 import mongoose from "mongoose";
 
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
 import { Input } from "@/components/ui/input";
 
 import {
@@ -31,7 +33,7 @@ const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
       console.log(`Deleting driver with ID: ${driverId}`);
       // Ensure driverId is a valid ObjectId before sending the request
       const objectId = new mongoose.Types.ObjectId(driverId);
-      await axios.patch(`http://localhost:3001/driver/${objectId}`, {
+      await axios.patch(`${serverUrl}/driver/${objectId}`, {
         selected: "0", // Set selected to "0" when deleting
       });
       console.log(`Driver with ID ${driverId} deleted successfully`);
@@ -46,7 +48,7 @@ const DriversPage: React.FC<{ drivers: Driver[] }> = ({ drivers }) => {
       console.log(`Selecting driver with ID: ${driverId}`);
       // Ensure driverId is a valid ObjectId before sending the request
       const objectId = new mongoose.Types.ObjectId(driverId);
-      await axios.patch(`http://localhost:3001/driver/${objectId}`, {
+      await axios.patch(`${serverUrl}/driver/${objectId}`, {
         selected: "1", // Set selected to "1" when selecting
       });
       console.log(`Driver with ID ${driverId} selected successfully`);
@@ -136,7 +138,7 @@ const DriverCard: React.FC<DriverCardProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const response = await axios.get("http://localhost:3001/driver/");
+    const response = await axios.get(`${serverUrl}/driver/`);
     const drivers: Driver[] = response.data;
     return { props: { drivers } };
   } catch (error) {

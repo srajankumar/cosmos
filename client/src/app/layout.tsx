@@ -14,18 +14,18 @@ export const metadata: Metadata = {
     default: "Cosmos",
     template: `%s - Cosmos`,
   },
-  description: "Elevating workforce dynamics.",
+  description: "A workforce management app.",
   creator: "srajankumar",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://thecosmos.vercel.app",
+    url: "https://cosmos-c.vercel.app/",
     title: "Cosmos",
-    description: "Elevating workforce dynamics.",
+    description: "A workforce management app.",
     siteName: "Cosmos",
     images: [
       {
-        url: "https://thecosmos.vercel.app/og.png",
+        url: "https://cosmos-c.vercel.app/og.png",
         width: 1200,
         height: 630,
         alt: "Cosmos",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Cosmos",
-    description: "Elevating workforce dynamics.",
-    images: "https://thecosmos.vercel.app/og.png",
+    description: "A workforce management app.",
+    images: "https://cosmos-c.vercel.app/og.png",
   },
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
