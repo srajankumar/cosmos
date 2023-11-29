@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: `%s - Cosmos`,
   },
   description: "A workforce management app.",
-  creator: "srajankumar",
+  creator: "srajankumar,Tejas Nayak B",
   openGraph: {
     type: "website",
     locale: "en_US",
