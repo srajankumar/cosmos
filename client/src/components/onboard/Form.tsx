@@ -21,7 +21,6 @@ export default function DriverRegister() {
   const [country, setCountry] = useState("");
   const [website, setWebsite] = useState("");
   const [password, setPassword] = useState("");
-  const [selected, setSelected] = useState("");
 
   const onSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -51,6 +50,7 @@ export default function DriverRegister() {
       setInterest("");
       setCountry("");
       setWebsite("");
+      setPassword("");
       //   window.location.href = "/driver/login";
     } catch (err) {
       console.error(err);
