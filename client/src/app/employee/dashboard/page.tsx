@@ -53,7 +53,7 @@ export default function DashboardPage() {
     localStorage.removeItem("userToken");
 
     // Redirect to the specified page
-    // window.location.href = "/";
+    window.location.href = "/";
   };
 
   // Effect to show the popup every 5 seconds
