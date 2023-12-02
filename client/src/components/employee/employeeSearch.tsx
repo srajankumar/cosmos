@@ -125,7 +125,7 @@ const DriverCard: React.FC<DriverCardProps> = ({
   return (
     <Card className={`w-full dark:text-black`}>
       <CardHeader>
-        <CardTitle className="text-xl">{driver.name}</CardTitle>
+        <CardTitle className="text-xl dark:text-white">{driver.name}</CardTitle>
         <CardDescription className="flex justify-between">
           <div>{driver.interest}</div>
           <div>{driver.experience}</div>

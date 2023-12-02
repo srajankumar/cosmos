@@ -147,27 +147,27 @@ export default function DashboardPage() {
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList className="md:flex rounded-full md:text-xl md:justify-start grid grid-cols-3 py-8">
+            <TabsList className="md:flex md:rounded-full mt-5 rounded-2xl md:text-xl md:justify-start grid grid-cols-3 md:py-8 pb-[5.5rem] px-3 md:px-0">
               <TabsTrigger
-                className="md:my-0 shadow-lg rounded-full ml-3 px-10 py-2 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg rounded-full md:ml-3 px-10 py-2 my-1 mr-1 md:mr-0"
                 value="overview"
               >
                 Overview
               </TabsTrigger>
               <TabsTrigger
-                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg md:ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
                 value="onboard"
               >
                 Onboard
               </TabsTrigger>
               <TabsTrigger
-                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1"
+                className="md:my-0 shadow-lg md:ml-3 rounded-full px-10 my-1"
                 value="waiting"
               >
                 Waiting
               </TabsTrigger>
               <TabsTrigger
-                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg md:ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
                 value="rejected"
               >
                 DB
@@ -178,8 +178,8 @@ export default function DashboardPage() {
               className="space-y-4 md:space-x-6 flex md:flex-row flex-col"
             >
               <div className="lg:w-1/2 w-full">
-                <div className="bg-pink-500/10 dark:bg-pink-200 rounded-2xl flex flex-col items-center mt-7 py-5">
-                  <p className="text-3xl font-medium text-gray-500">Welcome,</p>
+                <div className="bg-pink-500/10 dark:bg-pink-200 rounded-2xl flex flex-col items-center mt-2 py-5">
+                  <p className="text-3xl font-medium text-gray-600">Welcome,</p>
                   <p className="text-3xl font-medium dark:text-black">
                     {userName}
                   </p>

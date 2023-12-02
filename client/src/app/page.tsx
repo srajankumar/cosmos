@@ -19,7 +19,7 @@ const Page = () => {
   console.log(termsAccepted);
   return (
     <div>
-      <div className="flex items-center md:py-40 py-20 flex-col min-h-screen">
+      <div className="flex items-center md:py-40 py-28 flex-col min-h-screen">
         <div className="max-w-4xl px-5 space-y-5">
           <div className="space-y-3">
             <div className="flex space-x-4 items-center">

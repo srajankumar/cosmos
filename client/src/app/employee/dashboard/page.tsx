@@ -53,7 +53,7 @@ export default function DashboardPage() {
     localStorage.removeItem("userToken");
 
     // Redirect to the specified page
-    window.location.href = "/";
+    // window.location.href = "/";
   };
 
   // Effect to show the popup every 5 seconds
@@ -112,21 +112,21 @@ export default function DashboardPage() {
             </div>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList className="md:flex rounded-full md:text-xl md:justify-start grid grid-cols-3 py-8">
+            <TabsList className="md:flex rounded-full mt-5 md:text-xl md:justify-start grid grid-cols-3 md:py-8 pb-12 px-3 md:px-0">
               <TabsTrigger
-                className="md:my-0 shadow-lg rounded-full ml-3 px-10 py-2 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg rounded-full md:ml-3 px-10 py-2 my-1 mr-1 md:mr-0"
                 value="overview"
               >
                 Overview
               </TabsTrigger>
               <TabsTrigger
-                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
+                className="md:my-0 shadow-lg md:ml-3 rounded-full px-10 my-1 mr-1 md:mr-0"
                 value="onboard"
               >
                 Milestones
               </TabsTrigger>
               <TabsTrigger
-                className="md:my-0 shadow-lg ml-3 rounded-full px-10 my-1"
+                className="md:my-0 shadow-lg md:ml-3 rounded-full px-10 my-1"
                 value="waiting"
               >
                 Progress

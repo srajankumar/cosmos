@@ -113,7 +113,9 @@ const DriverCard: React.FC<DriverCardProps> = ({
     <Card className={`w-full dark:text-black ${color}`}>
       <CardHeader>
         <CardTitle>{driver.name}</CardTitle>
-        <CardDescription>{driver.interest}</CardDescription>
+        <CardDescription className="text-gray-500">
+          {driver.interest}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Accordion type="single" collapsible className="w-full">
