@@ -26,43 +26,10 @@ A workforce management app.
 ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-## How to Build the App
-
-1. Fork and Clone the repository to your local machine
-
-```bash
-   git clone https://github.com/<YOUR_USERNAME>/novu
-```
-
-2. Navigate to both the `client` and `server` directories and install the necessary dependencies
-
-```bash
-   cd client && yarn
-```
-
-```bash
-   cd server && yarn
-```
-
-3. Duplicate `.env.local.example` to `.env.local` file in the root of `client` directory and `.env.example` to `.env` file in the root of `server` directory
-
-```bash
-   cd client && cp .env.local.example .env.local
-   cd server && cp .env.example .env
-```
-
-4. Start the development of both the `client` and `server` in separate terminals
-
-```bash
-   cd client && yarn dev
-```
-
-```bash
-   cd server && yarn start
-```
-
 ## Contributors
 
 <a href="https://github.com/srajankumar/cosmos/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=srajankumar/cosmos" />
 </a>
+
+#### Edit: Placed in top 11 in Smart Nitte Hackathon 2023, conducted by TASC, NMAMIT, NITTE 🎉
