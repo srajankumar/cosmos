@@ -4,7 +4,7 @@
 
 ## About
 
-A workforce management app.
+A workforce management system with streamlined onboarding process and an advanced efficiency tracking system.
 
 ## Features
 
